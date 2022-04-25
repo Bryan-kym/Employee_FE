@@ -20,18 +20,23 @@
               <div class="input-group-append">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
-              <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="">
+              <input type="password" class="form-control" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required autocomplete="off">
             </div>
-            <span class="help-block" style="color: red;">Please enter a password</span>
+            <span class="help-block" style="color: red;" *ngIf= "passwordInput.invalid && passwordInput.touched">Please enter a password</span>
             <div class="d-flex justify-content-center mt-3 login_container">
-              <button type="submit" name="button" class="btn login_btn">
-                <i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-                <span >Loading...</span>
-                <span >Login</span>
+              <button type="submit" [disabled] ="loginForm.invalid || showLoading" name="button" class="btn login_btn">
+                <i *ngIf= "showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+                <span *ngIf= "showLoading">Loading...</span>
+                <span *ngIf= "!showLoading">Login</span>
               </button>
             </div>
           </form>
         </div>
+        <!-- <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Don't have an account? <a routerLink="/register" class="ml-2" style="color: #2c3e50;">Sign up</a>
+          </div>
+        </div> -->
       </div>
     </div>
 </div>

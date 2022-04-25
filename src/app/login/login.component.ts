@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HeaderType } from '../enum/header-type.enum';
 import { NotificationType } from '../enum/notification-type.enum';
 import { AuthenticationService } from '../service/authentication.service';
 import { User } from '../service/model/user';
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscriptions.push(
       this.authenticationService.login(user).subscribe(
         (respose:HttpResponse<User>) =>{
-          const token = respose.headers.get('Jwt-Token');
+          const token = respose.headers.get(HeaderType.JWT_TOKEN);
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(respose.body);
           this.router.navigateByUrl('/employee/management');
@@ -40,17 +41,17 @@ export class LoginComponent implements OnInit, OnDestroy{
         },
         (errorResponse: HttpErrorResponse) => {
           console.log(errorResponse);
-          this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.sendErrorNotification(NotificationType.Error, errorResponse.error.message);
           this.showLoading = false;
         }
       )
     )
   }
-  private sendErrorNotification(notificationType: NotificationType, message: string) {
+  private sendErrorNotification(notificationType: NotificationType, message: string): void {
     if(message) {
       this.notificationService.notify(notificationType, message);
     }else{
-      this.notificationService.notify(notificationType, 'AN ERROR OCCURED, PLEASE TRY AGAIN');
+      this.notificationService.notify(notificationType, 'An error occured, please try again');
     }
   }
   ngOnDestroy(): void {

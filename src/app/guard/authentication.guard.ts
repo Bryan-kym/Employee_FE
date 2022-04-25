@@ -23,7 +23,7 @@ private isUserLoggedIn(): boolean{
     return true;
   }
   this.router.navigate(['/login']);
-  this.notificationService.notify(NotificationType.Error,'You need to login to accesss this page'.toUpperCase());
+  this.notificationService.notify(NotificationType.Error,'You need to login to accesss this page');
   return false;
 }
   

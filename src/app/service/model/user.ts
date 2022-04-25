@@ -1,5 +1,4 @@
 export class User {
-    public id:  number;
 	public userid: number;
 	public firstName: string;
 	public lastName: string;
@@ -10,14 +9,14 @@ export class User {
 	public email: string;
 	public department: string;
 	public position: string;
-	public profileImage: string;
+	public profileImageUrl: string;
 	public lastLoginDate: Date;
 	public lastLoginDateDisplay: Date;
 	public joinDate: Date;
 	public roles: string;
 	public authorities: [];
-	public isActive: boolean;
-	public isNotLocked: boolean;
+	public active: boolean;
+	public notLocked: boolean;
 
 
     constructor(){
@@ -25,14 +24,14 @@ export class User {
         this.department = '';
         this.email = '';
         this.firstName = '';
-        this.isActive = false;
-        this.isNotLocked = false;
+        this.active = false;
+        this.notLocked = false;
         this.lastName = '';
-        this.nid = null;
-        this.mobile = null;
+        this.nid = 0;
+        this.mobile = 0;
         this.password = '';
         this.position = '';
-        this.profileImage = '';
+        this.profileImageUrl = '';
         this.roles= '';
         this.username = '';
 
